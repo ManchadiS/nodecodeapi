@@ -29,7 +29,8 @@ router.post('/saveUser', (req, res) => {
 
 router.get('/userlist', (req, res) => {
     userModel.find({}, function (err, response) {
-        if (response.length) {
+        console.log(response)
+        if (response) {
             res.status(200).send({ status: true, data: response })
         } else {
             res.status(400).send({ status: false, msg: "somthing went wrong" })
