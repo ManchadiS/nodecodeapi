@@ -13,10 +13,6 @@ const userSchema = new Schema({
     },
     mobile_number: {
         type: String
-    },
-    profile_image_url: {
-        type: String,
-        default: ""
     }
 }, { timestamps: true });
 module.exports = mongoose.model('users', userSchema);
