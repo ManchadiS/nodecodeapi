@@ -6,19 +6,18 @@ const upload = multer({ dest: "profile_images" });
 router.post('/saveUser', (req, res) => {
     userModel.find({ $and: [{ email: req.body.email }] }, function (err, response) {
         if (response.length > 0) {
-            res.status(400).send({ status: false, msg: 'User Already Exist.' });
+            res.status(403).send({ status: false, msg: 'User Already Exist.' });
         }
         else {
             var saveNewUser = new userModel({
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 email: req.body.email,
-                mobile_number: req.body.mobile_number,
-                profile_image_url: req.body.profile_image_url
+                mobile_number: req.body.mobile_number
             });
             saveNewUser.save(function (error, resp) {
                 if (error) {
-                    res.status(400).send({ status: false, msg: 'Something Went Wrong' })
+                    res.status(403).send({ status: false, msg: 'Something Went Wrong' })
                 } else {
                     res.status(200).send({ status: true, msg: 'User Added Successfully.' })
                 }
