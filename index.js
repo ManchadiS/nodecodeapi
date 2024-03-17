@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var port = process.env.PORT || 8100;
 var indexRouter = require('./routes/index');
+var userRouter = require("./routes/users.js")
 var hbs = require('express-handlebars');
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser')
@@ -25,7 +26,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'profile_images')));
 
-app.use('/', indexRouter);
+app.use('/admin', indexRouter);
+app.use('/api', userRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

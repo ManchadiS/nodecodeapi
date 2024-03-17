@@ -3,7 +3,8 @@ var router = express.Router();
 const userModel = require('../../model/userModel');
 const multer = require('multer')
 const upload = multer({ dest: "profile_images" });
-router.post('/saveUser', (req, res) => {
+router.post('/saveUser/:id/:name', (req, res) => {
+    console.log(req.body, req.params, req.query)
     userModel.find({ $and: [{ email: req.body.email }] }, function (err, response) {
         if (response.length > 0) {
             res.status(403).send({ status: false, msg: 'User Already Exist.' });
@@ -19,7 +20,7 @@ router.post('/saveUser', (req, res) => {
                 if (error) {
                     res.status(403).send({ status: false, msg: 'Something Went Wrong' })
                 } else {
-                    res.status(200).send({ status: true, msg: 'User Added Successfully.' })
+                    res.status(200).send({ status: true, msg: 'User Added Successfully.', resp: resp })
                 }
             })
         }
@@ -27,8 +28,9 @@ router.post('/saveUser', (req, res) => {
 });
 
 router.get('/userlist', (req, res) => {
+    // console.log("rrrrrrrrrrrrr")
     userModel.find({}, function (err, response) {
-        console.log(response)
+        // console.log(response)
         if (response) {
             res.status(200).send({ status: true, data: response })
         } else {
