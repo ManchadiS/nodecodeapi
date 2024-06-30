@@ -38,7 +38,8 @@ app.use(function (req, res, next) {
 var server = app.listen(port);
 console.log('Magic happens at http://localhost: ' + port);
 //  const mongoUrl = 'mongodb://192.168.1.23:27017/TESTHMSDB'
-const mongoUrl = 'mongodb://localhost:27017/testDb'
+// const mongoUrl = 'mongodb+srv://sagarmanchadi324:WZeP3jAzg4kscH90@cluster0.xyroynn.mongodb.net/?retryWrites=true&w=majority'
+const mongoUrl = "mongodb://localhost:27017/HotelDB"
 var conc = mongoose.connect(mongoUrl,
     (err) => {
         if (err) {
